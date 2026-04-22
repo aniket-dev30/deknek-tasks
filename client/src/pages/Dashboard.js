@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import TaskForm from '../components/TaskForm';
@@ -13,19 +13,14 @@ function Dashboard() {
 
   const token = localStorage.getItem('token');
   const user = JSON.parse(localStorage.getItem('user') || '{}');
+  
+  const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
-  useEffect(() => {
-    if (!token) {
-      navigate('/login');
-      return;
-    }
-    fetchTasks();
-  }, [token, navigate]);
-
-  const fetchTasks = async () => {
+  // Use useCallback to memoize fetchTasks
+  const fetchTasks = useCallback(async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:5000/api/tasks', {
+      const response = await axios.get(`${API_URL}/api/tasks`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -36,8 +31,18 @@ function Dashboard() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [token, API_URL]);
 
+  // Now fetchTasks is in the dependency array
+  useEffect(() => {
+    if (!token) {
+      navigate('/login');
+      return;
+    }
+    fetchTasks();
+  }, [token, navigate, fetchTasks]);
+
+  // Rest of your code...
   const handleAddTask = (newTask) => {
     setTasks([newTask, ...tasks]);
   };
