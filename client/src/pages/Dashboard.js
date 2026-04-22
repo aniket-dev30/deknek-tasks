@@ -14,7 +14,7 @@ function Dashboard() {
   const token = localStorage.getItem('token');
   const user = JSON.parse(localStorage.getItem('user') || '{}');
   
-  const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+  const API_URL = process.env.https://deknek-tasks-api.onrender.com || 'http://localhost:5000';
 
   // Use useCallback to memoize fetchTasks
   const fetchTasks = useCallback(async () => {

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/Auth.css';
 
 function Login() {
+  const API_URL = process.env.https://deknek-tasks-api.onrender.com;
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -22,7 +23,7 @@ function Login() {
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', formData);
+      const response = await axios.post(`${API_URL}/api/auth/login`, formData);
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('user', JSON.stringify(response.data.user));
       navigate('/dashboard');

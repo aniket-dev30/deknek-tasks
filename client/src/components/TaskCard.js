@@ -5,11 +5,12 @@ import '../styles/TaskCard.css';
 function TaskCard({ task, onDelete, onUpdate, token }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editData, setEditData] = useState(task);
+  const API_URL = process.env.https://deknek-tasks-api.onrender.com || 'http://localhost:5000';
 
   const handleToggleComplete = async () => {
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/tasks/${task._id}`,
+        `${API_URL}/api/tasks/${task._id}`,
         { completed: !task.completed },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -22,7 +23,7 @@ function TaskCard({ task, onDelete, onUpdate, token }) {
   const handleDelete = async () => {
     if (window.confirm('Are you sure you want to delete this task?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/tasks/${task._id}`, {
+        await axios.delete(`${API_URL}/api/tasks/${task._id}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         onDelete(task._id);
@@ -35,7 +36,7 @@ function TaskCard({ task, onDelete, onUpdate, token }) {
   const handleSaveEdit = async () => {
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/tasks/${task._id}`,
+        `${API_URL}/api/tasks/${task._id}`,
         editData,
         { headers: { Authorization: `Bearer ${token}` } }
       );

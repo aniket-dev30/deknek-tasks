@@ -11,6 +11,7 @@ function TaskForm({ onAddTask, token }) {
     dueDate: ''
   });
   const [loading, setLoading] = useState(false);
+  const API_URL = process.env.https://deknek-tasks-api.onrender.com || 'http://localhost:5000';
 
   const handleChange = (e) => {
     setFormData({
@@ -28,7 +29,7 @@ function TaskForm({ onAddTask, token }) {
 
     try {
       setLoading(true);
-      const response = await axios.post('http://localhost:5000/api/tasks', formData, {
+      const response = await axios.post(`${API_URL}/api/tasks`, formData, {
         headers: {
           Authorization: `Bearer ${token}`
         }

@@ -8,6 +8,7 @@ function Signup() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const API_URL = process.env.https://deknek-tasks-api.onrender.com || 'http://localhost:5000';
 
   const handleChange = (e) => {
     setFormData({
@@ -22,7 +23,7 @@ function Signup() {
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/signup', formData);
+      const response = await axios.post(`${API_URL}/api/auth/signup`, formData);
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('user', JSON.stringify(response.data.user));
       navigate('/dashboard');
