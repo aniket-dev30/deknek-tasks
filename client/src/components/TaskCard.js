@@ -5,8 +5,7 @@ import '../styles/TaskCard.css';
 function TaskCard({ task, onDelete, onUpdate, token }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editData, setEditData] = useState(task);
-  const API_URL = process.env.https://deknek-tasks-api.onrender.com || 'http://localhost:5000';
-
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
   const handleToggleComplete = async () => {
     try {
       const response = await axios.put(

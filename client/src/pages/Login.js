@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/Auth.css';
 
 function Login() {
-  const API_URL = process.env.https://deknek-tasks-api.onrender.com;
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
