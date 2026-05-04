@@ -2,7 +2,7 @@
 
 ## 📌 Overview
 
-This is a full-stack Task Management application built as part of the DekNek Full Stack Developer Internship assessment.
+This is a full-stack Task Management application developed.
 The app allows users to securely register, log in, and manage their tasks (create, view, delete).
 
 ---
